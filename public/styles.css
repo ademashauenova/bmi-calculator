@@ -1,0 +1,56 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #b9d4f1;
+}
+
+.container {
+    max-width: 400px;
+    margin: auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+button {
+    margin-top: 10px;
+}
+
+footer {
+    padding: 1rem;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+}
+
+input[type="radio"] {
+    background-color: grey;
+    border: 2px solid grey;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+input[type="number"],
+select {
+    background-color: #f1f6f8;
+    border: 2px solid grey;
+    border-radius: 5px;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+button[type="submit"] {
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+}

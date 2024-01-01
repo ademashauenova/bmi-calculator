@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>BMI Calculator</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5">
+        <div class="navbar-brand mb-0 h1 pl-4">BMI Calculator</div>
+        <div class="container-fluid mx-5" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item mx-3">
+                    <a class="nav-link active" href="/">Home</a>
+                </li>
+                <li class="nav-item mx-3">
+                    <a class="nav-link" href="/history">History</a>
+                </li>
+                <li class="nav-item mx-3">
+                    <a class="nav-link" href="/about">About</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-3">
+        <form action="/bmicalculator" method="post" id="bmiForm" onsubmit="scrollToResult()">
+            <label for="height">Height:</label>
+            <input type="number" name="height" required>
+            <select name="heightUnit">
+                <option value="cm">cm</option>
+                <option value="in">in</option>
+            </select>
+
+            <label for="weight">Weight:</label>
+            <input type="number" name="weight" required>
+            <select name="weightUnit">
+                <option value="kg">kg</option>
+                <option value="lb">lb</option>
+            </select>
+
+            <label for="age">Age:</label>
+            <input type="number" name="age" required>
+
+            <label>Gender:</label>
+            <div>
+                <input type="radio" id="male" name="gender" value="male" required>
+                <label for="male">Male</label>
+            </div>
+            <div>
+                <input type="radio" id="female" name="gender" value="female" required>
+                <label for="female">Female</label>
+            </div>
+
+            <button type="submit" class="btn btn-dark">Calculate BMI</button>
+        </form>
+        <div class="my-5" id="result"></div>
+    </div>
+    <footer class="mt-5 text-center">
+        <p>  Shauenova Adema SE-2204  </p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script>
+        function scrollToResult() {
+            setTimeout(function() {
+                window.scrollTo({
+                    top: document.getElementById('result').offsetTop,
+                    behavior: 'smooth'
+                });
+            }, 100);
+        }
+
+        $(document).ready(function () {
+            $('#bmiForm').submit(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: '/bmicalculator',
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        $('#result').html(response);
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
